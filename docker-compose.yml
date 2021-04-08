@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+    php:
+        build:
+            context: .
+            dockerfile: docker/php/Dockerfile
+        container_name: php
+        depends_on:
+            - api-db
+            - rabbitmq
+        env_file:
+            - backend/.env
+        volumes:
+            - ./backend:/var/www/backend
+        environment:
+            XDEBUG_CONFIG: "remote_host=docker.for.mac.localhost idekey=IDE_XDEBUG"
+            PHP_IDE_CONFIG: "serverName=docker-server"
+            DATABASE_URL: "mysql://root:root@api-db:3306/db_name"
+
+    backend:
+        image: nginx:1.14-alpine
+        container_name: backend
+        depends_on:
+            - php
+        env_file:
+            - backend/.env
+        ports:
+            - "8080:80"
+        volumes:
+            - ./backend/public:/var/www/backend/public:ro
+            - ./docker/nginx/conf.d:/etc/nginx/conf.d/
+    api-db:
+        image: mysql
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        container_name: api-db
+        hostname: mysql
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_DATABASE: db_name
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: root
+
+    rabbitmq:
+        image: rabbitmq:3-management-alpine
+        container_name: rabbitmq
+        environment:
+            RABBITMQ_DEFAULT_USER: symfony
+            RABBITMQ_DEFAULT_PASS: symfony
+        ports:
+            - 15672:15672
+
+    maildev:
+        container_name: maildevt3
+        command: --web 80 --smtp 25 --hide-extensions STARTTLS
+        image: djfarrelly/maildev
+        ports:
+            - 8003:80
+volumes:
+    db-data: {}
