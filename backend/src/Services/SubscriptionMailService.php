@@ -4,6 +4,8 @@
 namespace App\Services;
 
 use App\Entity\Subscription;
+use App\Repository\SubscriptionRepository;
+use App\Repository\UserRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
@@ -20,14 +22,20 @@ class SubscriptionMailService
      * @var MailerInterface
      */
     private $mailer;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
     /**
      * SubscriptionMailService constructor.
      * @param MailerInterface $mailer
+     * @param UserRepository $userRepository
      */
-    public function __construct(MailerInterface $mailer)
+    public function __construct(MailerInterface $mailer,UserRepository $userRepository)
     {
         $this->mailer = $mailer;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -36,9 +44,14 @@ class SubscriptionMailService
      */
     public function sendEmail(Subscription $subscription)
     {
+
+    //$subscriber=    $this->userRepository->find($subscription->getSubscriber());
+    //todo check if subscriber is null
+        $subscriber = $subscription->getSubscriber();
+
       $email = (new TemplatedEmail())
             ->from('support@hiitconsulting.com')
-            ->to($subscription->getSubscriber()->getEmail())
+            ->to()
             ->subject('Subscription Activated')
             ->htmlTemplate('emails/notify_client.html.twig')
             ->context([

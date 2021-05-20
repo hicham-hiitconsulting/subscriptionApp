@@ -52,7 +52,7 @@ class MailSubscriber implements EventSubscriberInterface
         if (!$subscription instanceof Subscription || Request::METHOD_POST !== $method) {
             return;
         }
-        $this->mailService->sendEmail($subscription);
+       // $this->mailService->sendEmail($subscription);
 
     }
 }
