@@ -86,8 +86,6 @@ class User implements UserInterface
      */
     private $phone;
 
-
-
     /**
      * @ORM\OneToMany(targetEntity=PaymentDetails::class, mappedBy="user",cascade={"remove"})
      */
