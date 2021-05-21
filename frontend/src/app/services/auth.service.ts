@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { TokenService } from './token.service';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {TokenService} from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,7 @@ export class AuthService {
     this.loggedIn.next(value);
   }
 
-  constructor(private Token: TokenService) { }
+  constructor(private Token: TokenService) {
+  }
 
 }
