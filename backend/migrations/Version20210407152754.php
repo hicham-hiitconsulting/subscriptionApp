@@ -12,12 +12,12 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20210407152754 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return '';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE payment_details (id INT AUTO_INCREMENT NOT NULL, user_id INT DEFAULT NULL, card_type VARCHAR(255) NOT NULL, card_num VARCHAR(255) NOT NULL, card_expiry DATE NOT NULL, card_holder_name VARCHAR(255) NOT NULL, INDEX IDX_6B6F0560A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -29,7 +29,7 @@ final class Version20210407152754 extends AbstractMigration
         $this->addSql('ALTER TABLE subscription ADD CONSTRAINT FK_A3C664D3ED5CA9E6 FOREIGN KEY (service_id) REFERENCES service (id)');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE subscription DROP FOREIGN KEY FK_A3C664D3ED5CA9E6');

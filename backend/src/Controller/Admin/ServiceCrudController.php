@@ -9,8 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 
 /**
- * Class ServiceCrudController
- * @package App\Controller\Admin
+ * Class ServiceCrudController.
  */
 class ServiceCrudController extends AbstractCrudController
 {
@@ -22,14 +21,12 @@ class ServiceCrudController extends AbstractCrudController
         return Service::class;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
         return [
             TextField::new('name'),
-            UrlField::new('url','URL'),
-            MoneyField::new('price','Price')->setCurrency('MAD')
+            UrlField::new('url', 'URL'),
+            MoneyField::new('price', 'Price')->setCurrency('MAD'),
         ];
     }
-
 }

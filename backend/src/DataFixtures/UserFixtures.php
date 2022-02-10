@@ -1,11 +1,7 @@
 <?php
 
-
 namespace App\DataFixtures;
 
-
-use App\Entity\PaymentDetails;
-use App\Entity\Subscription;
 use App\Entity\User;
 use App\Helpers\SecurityHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -15,12 +11,10 @@ use Faker\Generator;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * Class UserFixtures
- * @package App\DataFixtures
+ * Class UserFixtures.
  */
 class UserFixtures extends Fixture
 {
-
     public const USER_REFERENCE = 'user-fixture';
 
     /**
@@ -35,6 +29,7 @@ class UserFixtures extends Fixture
 
     /**
      * UserFixtures constructor.
+     *
      * @param UserPasswordEncoderInterface $encoder
      */
     public function __construct(UserPasswordEncoderInterface $encoder)
@@ -54,12 +49,11 @@ class UserFixtures extends Fixture
     /**
      * @param ObjectManager $manager
      */
-    public function loadUsers(ObjectManager $manager){
-
+    public function loadUsers(ObjectManager $manager)
+    {
         $roles = [SecurityHelper::ROLE_USER, SecurityHelper::ROLE_ADMIN];
 
-        for($i = 0;$i<20;$i++) {
-
+        for ($i = 0; $i < 20; $i++) {
             $user = new User();
             $user
                 ->setFirstname($this->faker->firstName)
@@ -68,19 +62,14 @@ class UserFixtures extends Fixture
                 ->setPhone($this->faker->phoneNumber)
                 ->setPassword($this->encoder->encodePassword($user, SecurityHelper::PASSWORD))
                 ->setRoles([$roles[rand(0, 1)]])
-                ->addSubscription(($this->getReference(SubscriptionFixtures::SUBSCRIPTION_REFERENCE.rand(0,19))))
-                ->addPayment(($this->getReference(PaymentDetailsFixtures::PAYMENT_REFERENCE.rand(0,9))))
+                ->addSubscription(($this->getReference(SubscriptionFixtures::SUBSCRIPTION_REFERENCE.rand(0, 19))))
+                ->addPayment(($this->getReference(PaymentDetailsFixtures::PAYMENT_REFERENCE.rand(0, 9))))
 
                 //todo edit and separate admin and user function
-            ;
+;
             $manager->persist($user);
             $this->addReference(self::USER_REFERENCE.$i, $user);
-
         }
         $manager->flush();
-
-
     }
-
-
 }

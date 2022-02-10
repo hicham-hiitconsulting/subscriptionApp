@@ -1,10 +1,7 @@
 <?php
 
-
 namespace App\DataFixtures;
 
-
-use App\Entity\Service;
 use App\Entity\Subscription;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -13,8 +10,7 @@ use Faker\Generator;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * Class SubscriptionFixtures
- * @package App\DataFixtures
+ * Class SubscriptionFixtures.
  */
 class SubscriptionFixtures extends Fixture
 {
@@ -35,6 +31,7 @@ class SubscriptionFixtures extends Fixture
 
     /**
      * SubscriptionFixtures constructor.
+     *
      * @param UserPasswordEncoderInterface $encoder
      */
     public function __construct(UserPasswordEncoderInterface $encoder)
@@ -45,21 +42,19 @@ class SubscriptionFixtures extends Fixture
     /**
      * @param ObjectManager $manager
      */
-    public  function loadSubscription(ObjectManager $manager){
-
-        for ($i=0;$i<20;$i++){
+    public function loadSubscription(ObjectManager $manager)
+    {
+        for ($i = 0; $i < 20; $i++) {
             $subscription = new Subscription();
             $subscription->setStartDate($this->faker->dateTimeThisMonth);
             $subscription->setEndDate($this->faker->dateTimeThisYear);
             $subscription->setTitle($this->faker->name);
             $subscription->setStatus($this->faker->boolean);
-            $subscription->setService($this->getReference(ServiceFixtures::SERVICE_REFERENCE.rand(0,4)));
+            $subscription->setService($this->getReference(ServiceFixtures::SERVICE_REFERENCE.rand(0, 4)));
 
             $manager->persist($subscription);
             $this->addReference(self::SUBSCRIPTION_REFERENCE.$i, $subscription);
-
         }
         $manager->flush();
-
     }
 }

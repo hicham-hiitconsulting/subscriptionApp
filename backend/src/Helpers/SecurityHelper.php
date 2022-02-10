@@ -1,11 +1,9 @@
 <?php
 
-
 namespace App\Helpers;
 
 /**
- * Class SecurityHelper
- * @package App\Helpers
+ * Class SecurityHelper.
  */
 class SecurityHelper
 {

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\EventSubscriber;
 
 use App\Entity\User;
@@ -9,9 +8,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class EasyAdminCryptPasswordSubscriber  implements EventSubscriberInterface
+class EasyAdminCryptPasswordSubscriber implements EventSubscriberInterface
 {
-
     /**
      * @var UserPasswordEncoderInterface
      */
@@ -19,6 +17,7 @@ class EasyAdminCryptPasswordSubscriber  implements EventSubscriberInterface
 
     /**
      * CryptPasswordSubscriber constructor.
+     *
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
@@ -30,8 +29,9 @@ class EasyAdminCryptPasswordSubscriber  implements EventSubscriberInterface
     {
         return [
             BeforeEntityPersistedEvent::class => ['cryptPasswordOnPost'],
-            BeforeEntityUpdatedEvent::class => ['cryptPasswordOnPut']
-        ];    }
+            BeforeEntityUpdatedEvent::class   => ['cryptPasswordOnPut'],
+        ];
+    }
 
     /**
      * @param BeforeEntityPersistedEvent $event
@@ -43,10 +43,10 @@ class EasyAdminCryptPasswordSubscriber  implements EventSubscriberInterface
         if (!($entity instanceof User)) {
             return;
         }
-            $entity->setPassword($this->passwordEncoder->encodePassword(
-                $entity,
-                $entity->getPassword()
-            ));
+        $entity->setPassword($this->passwordEncoder->encodePassword(
+            $entity,
+            $entity->getPassword()
+        ));
     }
 
     /**
@@ -64,5 +64,4 @@ class EasyAdminCryptPasswordSubscriber  implements EventSubscriberInterface
             $entity->getPassword()
         ));
     }
-
 }
