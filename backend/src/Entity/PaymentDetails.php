@@ -29,19 +29,16 @@ class PaymentDetails
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     *
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
      */
     private $cardType;
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
      */
     private $cardNum;
 
@@ -53,13 +50,11 @@ class PaymentDetails
 
     /**
      * @ORM\Column(type="string", length=255)
-     *
      */
     private $cardHolderName;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="payment")
-     *
      */
     private $user;
 
@@ -127,6 +122,7 @@ class PaymentDetails
 
         return $this;
     }
+
     public function __toString(): string
     {
         return $this->cardType;

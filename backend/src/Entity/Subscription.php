@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\SubscriptionRepository;
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Groups;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use App\Repository\SubscriptionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=SubscriptionRepository::class)
@@ -72,14 +72,11 @@ class Subscription
      */
     private $status;
 
-
-
     /**
      * @ORM\ManyToOne(targetEntity=Service::class, inversedBy="subscriptions")
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"subscription"})
      * @ApiSubresource()
-     *
      */
     private $service;
 
@@ -92,7 +89,6 @@ class Subscription
     {
         $this->subscriber = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -119,7 +115,6 @@ class Subscription
         return $this->endDate;
     }
 
-
     public function setEndDate(\DateTimeInterface $endDate): self
     {
         $this->endDate = $endDate;
@@ -139,9 +134,6 @@ class Subscription
         return $this;
     }
 
-
-
-
     public function getService(): ?Service
     {
         return $this->service;
@@ -154,8 +146,6 @@ class Subscription
         return $this;
     }
 
-
-
     public function getTitle(): ?string
     {
         return $this->title;
@@ -167,6 +157,7 @@ class Subscription
 
         return $this;
     }
+
     public function __toString(): string
     {
         return $this->title;

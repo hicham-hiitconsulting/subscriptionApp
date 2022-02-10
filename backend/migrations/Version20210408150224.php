@@ -12,12 +12,12 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20210408150224 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return '';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE subscription_user (subscription_id INT NOT NULL, user_id INT NOT NULL, INDEX IDX_BAAFC6579A1887DC (subscription_id), INDEX IDX_BAAFC657A76ED395 (user_id), PRIMARY KEY(subscription_id, user_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -28,7 +28,7 @@ final class Version20210408150224 extends AbstractMigration
         $this->addSql('ALTER TABLE subscription DROP subscriber_id');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP TABLE subscription_user');

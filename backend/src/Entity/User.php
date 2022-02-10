@@ -2,16 +2,15 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use ApiPlatform\Core\Annotation\ApiFilter;
-use ApiPlatform\Core\Annotation\ApiSubresource;
-use ApiPlatform\Core\Annotation\ApiResource;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -86,8 +85,6 @@ class User implements UserInterface
      */
     private $phone;
 
-
-
     /**
      * @ORM\OneToMany(targetEntity=PaymentDetails::class, mappedBy="user",cascade={"remove"})
      */
@@ -97,7 +94,6 @@ class User implements UserInterface
      * @ORM\ManyToMany(targetEntity=Subscription::class, mappedBy="subscriber")
      */
     private $subscriptions;
-
 
     public function __construct()
     {
@@ -221,8 +217,6 @@ class User implements UserInterface
 
         return $this;
     }
-
-
 
     /**
      * @return Collection|PaymentDetails[]

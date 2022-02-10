@@ -6,13 +6,10 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
 /**
- * Class AppFixtures
- * @package App\DataFixtures
+ * Class AppFixtures.
  */
 class AppFixtures extends Fixture
 {
-
-
     public function load(ObjectManager $manager)
     {
         // $product = new Product();

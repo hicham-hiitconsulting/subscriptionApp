@@ -5,13 +5,12 @@ namespace App\EventSubscriber;
 use ApiPlatform\Core\EventListener\EventPriorities;
 use App\Entity\User;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * Class CryptPasswordSubscriber on POST and PUT
- * @package App\EventSubscriber
+ * Class CryptPasswordSubscriber on POST and PUT.
  */
 class CryptPasswordSubscriber implements EventSubscriberInterface
 {
@@ -22,6 +21,7 @@ class CryptPasswordSubscriber implements EventSubscriberInterface
 
     /**
      * CryptPasswordSubscriber constructor.
+     *
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
@@ -42,7 +42,6 @@ class CryptPasswordSubscriber implements EventSubscriberInterface
                 $entity->getPassword()
             ));
         }
-
     }
 
     /**
@@ -51,8 +50,7 @@ class CryptPasswordSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            'kernel.view' => ['onKernelView', EventPriorities::PRE_WRITE]
+            'kernel.view' => ['onKernelView', EventPriorities::PRE_WRITE],
         ];
-
     }
 }

@@ -12,12 +12,11 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 /**
- * Class MailSubscriber
- * @package App\EventSubscriber
+ * Class MailSubscriber.
  */
 class MailSubscriber implements EventSubscriberInterface
 {
-//todo create global class for mail
+    //todo create global class for mail
 
     /**
      * @var SubscriptionMailService
@@ -26,6 +25,7 @@ class MailSubscriber implements EventSubscriberInterface
 
     /**
      * MailSubscriber constructor.
+     *
      * @param SubscriptionMailService $mailService
      */
     public function __construct(SubscriptionMailService $mailService)
@@ -42,6 +42,7 @@ class MailSubscriber implements EventSubscriberInterface
 
     /**
      * @param ViewEvent $event
+     *
      * @throws TransportExceptionInterface
      */
     public function sendMail(ViewEvent $event): void
@@ -52,7 +53,6 @@ class MailSubscriber implements EventSubscriberInterface
         if (!$subscription instanceof Subscription || Request::METHOD_POST !== $method) {
             return;
         }
-       // $this->mailService->sendEmail($subscription);
-
+        // $this->mailService->sendEmail($subscription);
     }
 }

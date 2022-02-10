@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\DataFixtures;
-
 
 use App\Entity\PaymentDetails;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -11,8 +9,7 @@ use Faker\Factory;
 use Faker\Generator;
 
 /**
- * Class PaymentDetailsFixtures
- * @package App\DataFixtures
+ * Class PaymentDetailsFixtures.
  */
 class PaymentDetailsFixtures extends Fixture
 {
@@ -42,23 +39,19 @@ class PaymentDetailsFixtures extends Fixture
     /**
      * @param ObjectManager $manager
      */
-    public function loadPaymentDetails(ObjectManager $manager){
-
-        for($i =0;$i<10;$i++){
-            $payment  = new PaymentDetails();
+    public function loadPaymentDetails(ObjectManager $manager)
+    {
+        for ($i = 0; $i < 10; $i++) {
+            $payment = new PaymentDetails();
             $payment
                 ->setCardHolderName($this->faker->name)
                 ->setCardNum($this->faker->creditCardNumber)
                 ->setCardExpiry($this->faker->creditCardExpirationDate)
-                ->setCardType($this->faker->creditCardType)
-
-            ;
+                ->setCardType($this->faker->creditCardType);
 
             $manager->persist($payment);
             $this->addReference(self::PAYMENT_REFERENCE.$i, $payment);
-
         }
-     $manager->flush();
-
+        $manager->flush();
     }
 }
